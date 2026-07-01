@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Primeiro Gráfico</title> 
+    <style>
+		* {
+			padding: 0px;
+			margin: 0px;
+			}
+			
+		.resultados {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			
+			.cards {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				border: 1px solid;
+				height: 150px;
+				margin: 1rem;
+				border-radius: 15px;
+				padding: 0.8rem;
+				
+
+				}
+			
+			}
+		.cards .cards-tit {
+			font-size: 1.5rem;
+			}
+		
+		.cards .valores {
+			font-size: 2.4rem;
+			}
+			 
+		.box-saldo {
+			grid-column: 1 / -1;
+			
+			}
+			
+		.formulario {
+			position: relative;
+			display: grid;
+			border: 1px solid;
+			margin: 1rem;
+			padding: 1rem;
+			gap: 1rem;
+			
+			textarea {
+				resize: none;
+				}
+			
+			.box-categ-valor {				
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				}
+				
+			#adicionarTransicao {
+				grid-column: 1 / -1;
+				}
+			}
+			
+			.AnaliseDeGastos {
+				display: flex;
+				justify-content: space-between;
+				padding: 1rem;
+				
+				#graficoDeGastos {
+					width: 200px; height: 200px;
+					border: 1px solid;
+					}
+					
+				}
+			
+			.formulario .box-add-cate {
+				position: absolute;
+				right: 1%;
+				bottom:5%;
+				}
+			
+			.formulario .box-categoria {			
+				display: flex;
+				flex-direction: column;
+				gap: 0.2rem;
+				text-align: center;
+				padding: 0.7rem 1.32rem;;
+				background: white;
+				border-radius: 12px;
+				border: 1px solid;
+				}
+			
+		
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<main>
+		<h1>Controle de Gastos</h1>
+		<div class="resultados">
+			<div class="cards">
+				<span class="receita cards-tit">Receita</span>
+				<div class="valorReceita valores">R$0,00</div>
+			</div>
+			<div class="cards">
+				<span class="despesa cards-tit">Despesas</span>
+				<span class="valorDespesa valores">R$0,00</span>
+				</div>
+			<div class="cards box-saldo">
+				<span class="saldo cards-tit">Saldo</span>
+				<div class="valorSaldo valores">R$0,00</div>
+			</div>		
+		</div>
+		<section>
+			<form class="formulario">
+				<h3>Nova transação</h3>
+				<textarea id="descricao" placeholder="Descriçao"></textarea>
+				
+				<div class="box-categ-valor">
+				    <input type="number" placeholder="Valor" min=0>
+				
+					<select id="categoria">
+						<option disabled selected>Categoria</option>
+						<option id="criarCategoria">Criar categoria +</option>
+					</select>
+								
+					
+					<input type="button" id="adicionarTransicao" value="Adicionar transição+">
+			</form>
+		</section>
+		<section>
+			<div>
+				<h3>Gastos por categoria</h3>
+				<div class="AnaliseDeGastos">
+					<canvas id="graficoDeGastos"></canvas>
+					<ul id="listaDeCategoria">
+						
+					</ul>
+			</div>
+			</div>
+		</section>
+	</main>
+	<script src="main.js"></script>
+</body>
+</html>
