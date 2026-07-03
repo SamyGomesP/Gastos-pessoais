@@ -1,0 +1,118 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	}
+	
+.resultados {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	
+	.cards {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 1px solid;
+		height: 150px;
+		margin: 1rem;
+		border-radius: 15px;
+		padding: 0.8rem;
+		
+
+		}
+	
+	}
+.cards .cards-tit {
+	font-size: 1.5rem;
+	}
+
+.cards .valores {
+	font-size: 2.4rem;
+	}
+	 
+.box-saldo {
+	grid-column: 1 / -1;
+	
+	}
+	
+.formulario {
+	position: relative;
+	display: grid;
+	border: 1px solid;
+	margin: 1rem;
+	padding: 1rem;
+	gap: 1rem;
+	
+	.opcoes-transacao {
+		display: flex;
+		gap: 1.2rem;
+		}
+	
+	textarea {
+		resize: none;
+		}
+	
+	.box-categ-valor {				
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		}
+		
+	#adicionarTransicao {
+		grid-column: 1 / -1;
+		}
+	}
+	
+	.AnaliseDeGastos {
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem;
+		
+		#graficoDeGastos {
+			width: 200px; height: 200px;
+			border: 1px solid;
+			}
+			
+		}
+	
+	.formulario .box-add-cate {
+		position: absolute;
+		right: 1%;
+		bottom:5%;
+		}
+	
+	.formulario .box-categoria {			
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		text-align: center;
+		padding: 0.7rem 1.32rem;;
+		background: white;
+		border-radius: 12px;
+		border: 1px solid;
+		}
+		
+	#historicoTransacoes {
+		margin: auto;
+		
+		padding: 1rem;
+		background: pink;
+		
+	
+	}
+	.dadoDaTransacao {
+		position: relative;
+		width: 95%;
+		border: 1px solid;
+		border-radius: 15px;
+		padding: 0.7rem;
+		margin-bottom: 0.7rem;
+		span {
+			position: absolute;
+			right: 5%;
+			top: 32%;
+			color: green;
+			
+			&::before {
+			content: 'R$';
+			}
+		} 
+	}

@@ -3,96 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Meu Primeiro Gráfico</title> 
-    <style>
-		* {
-			padding: 0px;
-			margin: 0px;
-			}
-			
-		.resultados {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			
-			.cards {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				border: 1px solid;
-				height: 150px;
-				margin: 1rem;
-				border-radius: 15px;
-				padding: 0.8rem;
-				
-
-				}
-			
-			}
-		.cards .cards-tit {
-			font-size: 1.5rem;
-			}
-		
-		.cards .valores {
-			font-size: 2.4rem;
-			}
-			 
-		.box-saldo {
-			grid-column: 1 / -1;
-			
-			}
-			
-		.formulario {
-			position: relative;
-			display: grid;
-			border: 1px solid;
-			margin: 1rem;
-			padding: 1rem;
-			gap: 1rem;
-			
-			textarea {
-				resize: none;
-				}
-			
-			.box-categ-valor {				
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				}
-				
-			#adicionarTransicao {
-				grid-column: 1 / -1;
-				}
-			}
-			
-			.AnaliseDeGastos {
-				display: flex;
-				justify-content: space-between;
-				padding: 1rem;
-				
-				#graficoDeGastos {
-					width: 200px; height: 200px;
-					border: 1px solid;
-					}
-					
-				}
-			
-			.formulario .box-add-cate {
-				position: absolute;
-				right: 1%;
-				bottom:5%;
-				}
-			
-			.formulario .box-categoria {			
-				display: flex;
-				flex-direction: column;
-				gap: 0.2rem;
-				text-align: center;
-				padding: 0.7rem 1.32rem;;
-				background: white;
-				border-radius: 12px;
-				border: 1px solid;
-				}
-			
-		
-    </style>
+    <link rel="stylesheet" href="styel.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -114,11 +25,15 @@
 		</div>
 		<section>
 			<form class="formulario">
-				<h3>Nova transação</h3>
+				<div class="opcoes-transacao">
+					<h3>Nova transação</h3>
+					 <button type="button" id="btnReceita" class="tipo-btn">Receita</button>
+					<button type="button" id="btnDespesa" class="tipo-btn">Despesa</button>
+				</div>
 				<textarea id="descricao" placeholder="Descriçao"></textarea>
 				
 				<div class="box-categ-valor">
-				    <input type="number" placeholder="Valor" min=0>
+				    <input type="number" id="valor"placeholder="Valor" min=0>
 				
 					<select id="categoria">
 						<option disabled selected>Categoria</option>
@@ -135,10 +50,16 @@
 				<div class="AnaliseDeGastos">
 					<canvas id="graficoDeGastos"></canvas>
 					<ul id="listaDeCategoria">
-						
 					</ul>
+				</div>
 			</div>
+		</section>
+		<section class="historico">
+			Histórico
+			<div id="historicoTransacoes">
+				
 			</div>
+		
 		</section>
 	</main>
 	<script src="main.js"></script>
