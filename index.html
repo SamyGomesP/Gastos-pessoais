@@ -8,7 +8,7 @@
 </head>
 <body>
 	<main>
-		<h1>Controle de Gastos</h1>
+		<h1 id="titulo">Controle de Gastos</h1>
 		<div class="resultados">
 			<div class="cards">
 				<span class="receita cards-tit">Receita</span>
@@ -27,17 +27,17 @@
 			<form class="formulario">
 				<div class="opcoes-transacao">
 					<h3>Nova transação</h3>
-					 <button type="button" id="btnReceita" class="tipo-btn">Receita</button>
-					<button type="button" id="btnDespesa" class="tipo-btn">Despesa</button>
+					 <input type="button" id="btnReceita" value="Receita" class="tipo-btn">
+					 <input type="button" id="btnDespesa" value="Despesa" class="tipo-btn">
 				</div>
 				<textarea id="descricao" placeholder="Descriçao"></textarea>
 				
 				<div class="box-categ-valor">
 				    <input type="number" id="valor"placeholder="Valor" min=0>
 				
-					<select id="categoria">
-						<option disabled selected>Categoria</option>
-						<option id="criarCategoria">Criar categoria +</option>
+					<select id="categoria" onchange="addCategoria(this)">
+						<option value="selecionado" disabled selected>Categoria</option>
+						<option value="criarCategoria" id="criarCategoria">Criar categoria +</option>
 					</select>
 								
 					
