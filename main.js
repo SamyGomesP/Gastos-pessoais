@@ -68,7 +68,7 @@ btnDespesa.addEventListener('click', () => {
 	btnReceita.classList.remove("ativo-receita");
 	});
 
-let transacoes = [];
+const transacoes = [];
 
 function adicionarTransacao() {
 	let descricao = document.getElementById("descricao").value;
@@ -84,7 +84,7 @@ function adicionarTransacao() {
 		alert("Digite um número válido");
 		return;
 		}
-	if (descricao.length <= 0) {
+	if (descricao.trim().length <= 0) {
 		alert("adicione uma descrição!")
 		return;
 		}
@@ -108,6 +108,8 @@ function adicionarTransacao() {
 		document.querySelector(".formulario").reset();
 	
 	atualizarGrafico()	
+	salvarStorage()
+	
 		
 	}
 
@@ -171,7 +173,9 @@ function atualizarCards() {
 	
 	let saldo = totalReceita - totalDespesa;
 	
-	document.querySelector(".valorReceita").textContent = `R$ ${totalReceita.toFixed(2).replace("." , ",")}`;
+	document.querySelector(".valorReceita").textContent = 
+	totalReceita.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+	//`R$ ${totalReceita.toFixed(2).replace("." , ",")}`;
 	document.querySelector(".valorDespesa").textContent = `R$ ${totalDespesa.toFixed(2).replace("." , ",")}`;
 	document.querySelector(".valorSaldo").textContent = `R$ ${saldo.toFixed(2).replace("." , ",")}`;
 	
@@ -183,15 +187,12 @@ grafico.addEventListener('click', adicionarTransacao);
 
  
 function adicionarHistorico(transacao) {
-	let descricaoDaTransacao = document.getElementById("descricao").value;
-	let valorTransacao = parseFloat(document.getElementById("valor").value);
-	let opcaoSelect = document.querySelector("#categoria");
-	let historicoTransacoes = document.querySelector("#historicoTransacoes")
-
+	let historicoTransacoes = document.querySelector("#historicoTransacoes");
 	let dadosTransacao = document.createElement("div");
 	dadosTransacao.classList.add("dadoDaTransacao");
 	
-	if (tipoSelecionado == "receita") {
+	
+	if (transacao.tipo == "receita") {
 		dadosTransacao.style.backgroundColor = "#b6f2b6"
 		}
 	else {
@@ -199,14 +200,15 @@ function adicionarHistorico(transacao) {
 		}	
 	dadosTransacao.innerHTML = `
 	<div class="registroHistorico">
-		${opcaoSelect.value}<br>
-		${descricaoDaTransacao} <span>${valorTransacao}</span>
+		${transacao.categoria}<br>
+		${transacao.descricao} <span>${transacao.valor}</span>
 	</div>`;
 	
 	historicoTransacoes.appendChild(dadosTransacao);
 	
+	
 	let apagar = document.createElement("button");
-	apagar.innerHTML = 'LIXO';
+	apagar.innerHTML = ' X ';
 	apagar.classList.add("apagarHistorico");
 	
 	dadosTransacao.appendChild(apagar);
@@ -220,11 +222,36 @@ function adicionarHistorico(transacao) {
 			//item atual, remove 1
 		}
 		
-		dadosTransacao.remove(); // remove da tela
+		dadosTransacao.remove(); 
 		atualizarCards(); // recalcula os totais
 		atualizarGrafico();
 		})
-	
+	salvarStorage();
 	
 	}
+function salvarStorage() {
+	const memoriaDasTransacoes = [];
 	
+	transacoes.forEach(function(conta) {
+		memoriaDasTransacoes.push({descricao: conta.descricao, categoria: conta.categoria, valor: conta.valor, tipo: conta.tipo})	
+		});
+	
+	localStorage.setItem("dadosDoHistorico", JSON.stringify(memoriaDasTransacoes));
+	
+	}
+function carregarDoStorage() {
+	try {
+	const dadosCarregados = JSON.parse(localStorage.getItem("dadosDoHistorico")) || [];
+	
+	dadosCarregados.forEach(function(dado) {
+		transacoes.push(dado);
+		adicionarHistorico(dado)
+		});
+	} catch(e)	{
+		alert("Erro ao carregar dados:", e)
+		}
+		
+		atualizarCards();
+		atualizarGrafico();
+	}
+carregarDoStorage()	
